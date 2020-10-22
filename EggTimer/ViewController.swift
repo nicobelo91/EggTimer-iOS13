@@ -14,6 +14,7 @@ class ViewController: UIViewController {
     let eggTimes = ["Soft": 5*60, "Medium": 7*60, "Hard": 12*60]
     
     var secondsRemaining: Int = 60
+    @IBOutlet var eggTitle: UILabel!
     var timer = Timer()
     
     @IBAction func hardnessSelected(_ sender: UIButton) {
@@ -36,11 +37,15 @@ class ViewController: UIViewController {
         secondsRemaining = eggTimes[hardness]!
         
         //MY SOLUTION
-         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (Timer) in
-         if self.secondsRemaining > 0 {
-            print ("\(self.secondsRemaining) seconds.")
-            self.secondsRemaining -= 1
-         }}
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (Timer) in
+            if self.secondsRemaining > 0 {
+                print ("\(self.secondsRemaining) seconds.")
+                self.secondsRemaining -= 1
+            } else {
+                self.timer.invalidate()
+                self.eggTitle.text = "Done!"
+            }
+        }
         
         
         //ANGELA'S SOLUTION
